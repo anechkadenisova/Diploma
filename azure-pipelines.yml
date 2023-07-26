@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: 'Azure Pipelines'
+  name: 'Default'
 
 steps:
 - task: NuGetCommand@2
