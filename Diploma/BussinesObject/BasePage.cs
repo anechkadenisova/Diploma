@@ -6,9 +6,9 @@ namespace Diploma.BussinesObject
 {
     public abstract class BasePage
     {
-        protected WebDriver driver;
+        protected IWebDriver driver;
 
-        public BasePage(WebDriver webDriver)
+        public BasePage(IWebDriver webDriver)
         {
             this.driver = webDriver;
         }

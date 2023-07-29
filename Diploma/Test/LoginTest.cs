@@ -1,6 +1,6 @@
 ﻿using Diploma.BussinesObject;
 using Diploma.Core;
-
+using Diploma.PageStep;
 
 namespace Diploma.Test
 {
@@ -10,6 +10,7 @@ namespace Diploma.Test
         public void Login_StandartUser()
         {
             Browser.Instance.NavigateToUrl("orangehrmlive");
+
             var page = new LoginPage(driver);
             page.EnterUsername();
 
@@ -18,20 +19,19 @@ namespace Diploma.Test
         [Test]
         public void LoginFailTest()
         {
-            Browser.Instance.NavigateToUrl("orangehrmlive");
+            var page = new LoginPage(driver);
+
+            page.OpenPage();
             var user = new UserModel()
             {
                 Name = "Test",
                 Password = "test"
             };
 
-           var page = new LoginPage(driver);
-
-            page.OpenPage();
             page.TryToLogin(user);
             page.VerifyErrorMessage();
 
         }
 
     }
-}
+ }

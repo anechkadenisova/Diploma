@@ -21,7 +21,7 @@ namespace Diploma.BussinesObject
         public const string STANDART_USER_NAME = "Admin";
         public const string STANDART_PASSWORD = "admin123";
 
-        public LoginPage(WebDriver webDriver) : base(webDriver)
+        public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
 
         }
@@ -42,6 +42,7 @@ namespace Diploma.BussinesObject
                 Password = STANDART_PASSWORD
             };
             TryToLogin(user);
+
         }
 
         [AllureStep]
@@ -62,7 +63,7 @@ namespace Diploma.BussinesObject
             }
             catch (NoSuchElementException)
             {
-                Assert.Pass("Good");
+                Assert.Pass("Successful authorization");
             }
         }
 
