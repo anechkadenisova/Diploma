@@ -5,19 +5,22 @@ namespace Diploma.BussinesObject
 {
     internal class JobPage : BasePage
     {
-        private By Admin = By.XPath("//span[text()='Admin']");
-        private By Jobs = By.XPath("//span[text()='Job ']");
-        private By JobTitles = By.XPath("//a[text()='Job Titles']");
+
         private By AddButton = By.CssSelector(".oxd-button--medium");
-        private By DownloadFile = By.CssSelector(".oxd-file-button");
         private By SaveJob = By.CssSelector(".oxd-button--secondary");
-
-
+        private By JobTitle = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
+        private By JobDescription = By.XPath("(//textarea[@placeholder='Type description here'])");
+        private By Note = By.XPath("(//textarea[@placeholder='Add note'])");
+        private By FieldAdmin = By.XPath("(//div[text()='Admin'])");
+        private By EditIcon = By.XPath("(//i[@class='oxd-icon bi-pencil-fill'])[2]");
+        private By DeleteIcon = By.XPath("(//i[@class='oxd-icon bi-trash'])[2]");
+        private By DownloadFile = By.XPath("//input[@type='file']");
+        private By DeletionConfirmation = By.CssSelector(".oxd-button--label-danger");
+        private By ErrorMessage = By.CssSelector(".oxd-input-field-error-message");
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
-
-        public JobPage(WebDriver webDriver) : base(webDriver)
+        public JobPage(IWebDriver webDriver) : base(webDriver)
         {
 
         }
@@ -27,38 +30,29 @@ namespace Diploma.BussinesObject
             return this;
         }
 
-        [AllureStep("Page Job Title")]
-        public void JobTitle()
-        {
-            driver.FindElement(Admin).Click();
-            driver.FindElement(Jobs).Click();
-            driver.FindElement(JobTitles).Click();
-        }
 
-        [AllureStep]
+        [AllureStep("Add new job")]
         public void AddNewJob()
     { 
             driver.FindElement(AddButton).Click();
 
-            driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]")).SendKeys("Admin");
-            driver.FindElement(By.XPath("(//textarea[@placeholder='Type description here'])")).SendKeys("test");
-
-
-            driver.FindElement(By.XPath("(//textarea[@placeholder='Add note'])")).SendKeys("test");
+            driver.FindElement(JobTitle).SendKeys("Admin");
+            driver.FindElement(JobDescription).SendKeys("test");
+            driver.FindElement(Note).SendKeys("test");
 
             Thread.Sleep(2000);
             driver.FindElement(SaveJob).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Change new job")]
         public void ChangeNewJob()
         {
             Thread.Sleep(2000);
-            IWebElement textElement = driver.FindElement(By.XPath("(//div[text()='Admin'])"));
-            IWebElement editElement = textElement.FindElement(By.XPath("(//i[@class='oxd-icon bi-pencil-fill'])[2]"));
+            IWebElement textElement = driver.FindElement(FieldAdmin);
+            IWebElement editElement = textElement.FindElement(EditIcon);
             editElement.Click();
 
-            IWebElement fileInput = driver.FindElement(By.XPath("//input[@type='file']"));
+            IWebElement fileInput = driver.FindElement(DownloadFile);
 
             var path = Environment.CurrentDirectory;
             var filePath = "\\TestData\\AddDev.txt";
@@ -71,31 +65,30 @@ namespace Diploma.BussinesObject
 
         }
 
-        [AllureStep]
+        [AllureStep("Delete new job")]
         public void DeleteNewJob()
         {
             Thread.Sleep(2000);
-            IWebElement textElement = driver.FindElement(By.XPath("(//div[text()='Admin'])"));
-            IWebElement delElement = textElement.FindElement(By.XPath("(//i[@class='oxd-icon bi-trash'])[2]"));
+            IWebElement textElement = driver.FindElement(FieldAdmin);
+            IWebElement delElement = textElement.FindElement(DeleteIcon);
             delElement.Click();
             Thread.Sleep(1000);
-            driver.FindElement(By.CssSelector(".oxd-button--label-danger")).Click();
-
-
+            driver.FindElement(DeletionConfirmation).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Error checking for an existing name job")]
         public void AddHRJob()
         {
             driver.FindElement(AddButton).Click();
 
-            driver.FindElement(By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]")).SendKeys("Finance Manager");
+            driver.FindElement(JobTitle).SendKeys("Finance Manager");
 
             driver.FindElement(SaveJob).Click();
 
-            string ErrorMessageJob = driver.FindElement(By.CssSelector(".oxd-input-field-error-message")).Text;
+            string ErrorMessageJob = driver.FindElement(ErrorMessage).Text;
             string errorMessage = "Already exists";
             Thread.Sleep(2000);
+            //Assert Fail?
             Assert.AreEqual(ErrorMessageJob, errorMessage);
         }
     }

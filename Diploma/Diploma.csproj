@@ -10,10 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Nlog.config" />
     <None Remove="TestData\AllureConfig.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\allureConfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

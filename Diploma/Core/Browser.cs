@@ -6,10 +6,10 @@ namespace Diploma.Core
 {
     public class Browser
     {
-        private static Browser instance = null;
+        private static Browser? instance;
 
-        protected WebDriver driver;
-        public WebDriver Driver { get { return driver; } }
+        protected IWebDriver driver;
+        public IWebDriver Driver { get { return driver; } }
 
         public static Browser Instance
         {
@@ -52,7 +52,11 @@ namespace Diploma.Core
         }
 
 
-
+        public void CloseBrowser()
+        {
+            driver?.Dispose();
+            instance = null;
+        }
 
     }
 }

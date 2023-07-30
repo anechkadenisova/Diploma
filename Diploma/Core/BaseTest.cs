@@ -11,14 +11,13 @@ namespace Diploma.Core
     public class BaseTest
     {
         private AllureLifecycle allure;
-        protected WebDriver driver = Browser.Instance.Driver;
-        private LoginPage loginPage;
-        private JobPage jobPage;
+        protected IWebDriver driver = Browser.Instance.Driver;
 
         [SetUp]
 
         public void SetUp()
         {
+            driver = Browser.Instance.Driver;
             allure = AllureLifecycle.Instance;
         }
 
@@ -31,7 +30,9 @@ namespace Diploma.Core
                 byte[] bytes = screenshot.AsByteArray;
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
-            driver.Quit();
+
+            Browser.Instance.CloseBrowser();
+
         }
     }
 }
