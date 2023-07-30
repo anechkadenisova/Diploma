@@ -31,7 +31,7 @@ namespace Diploma.BussinesObject
         }
 
 
-        [AllureStep]
+        [AllureStep("Add new job")]
         public void AddNewJob()
     { 
             driver.FindElement(AddButton).Click();
@@ -44,7 +44,7 @@ namespace Diploma.BussinesObject
             driver.FindElement(SaveJob).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Change new job")]
         public void ChangeNewJob()
         {
             Thread.Sleep(2000);
@@ -65,7 +65,7 @@ namespace Diploma.BussinesObject
 
         }
 
-        [AllureStep]
+        [AllureStep("Delete new job")]
         public void DeleteNewJob()
         {
             Thread.Sleep(2000);
@@ -76,7 +76,7 @@ namespace Diploma.BussinesObject
             driver.FindElement(DeletionConfirmation).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Error checking for an existing name job")]
         public void AddHRJob()
         {
             driver.FindElement(AddButton).Click();
@@ -88,6 +88,7 @@ namespace Diploma.BussinesObject
             string ErrorMessageJob = driver.FindElement(ErrorMessage).Text;
             string errorMessage = "Already exists";
             Thread.Sleep(2000);
+            //Assert Fail?
             Assert.AreEqual(ErrorMessageJob, errorMessage);
         }
     }
