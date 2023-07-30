@@ -11,8 +11,10 @@ namespace Diploma.Test
         {
             Browser.Instance.NavigateToUrl("orangehrmlive");
 
-            var page = new LoginPage(driver);
-            page.EnterUsername();
+            Steps.GivenEnterUsername(driver);
+
+            //var page = new LoginPage(driver);
+            //page.EnterUsername();
 
         }
 
