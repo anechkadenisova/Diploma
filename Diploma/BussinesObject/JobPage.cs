@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
+using NLog;
+
 
 namespace Diploma.BussinesObject
 {
@@ -20,6 +22,8 @@ namespace Diploma.BussinesObject
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
+        public static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+
         public JobPage(IWebDriver webDriver) : base(webDriver)
         {
 
@@ -31,7 +35,7 @@ namespace Diploma.BussinesObject
         }
 
 
-        [AllureStep]
+        [AllureStep("Add new job")]
         public void AddNewJob()
     { 
             driver.FindElement(AddButton).Click();
@@ -44,7 +48,7 @@ namespace Diploma.BussinesObject
             driver.FindElement(SaveJob).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Change new job")]
         public void ChangeNewJob()
         {
             Thread.Sleep(2000);
@@ -65,7 +69,7 @@ namespace Diploma.BussinesObject
 
         }
 
-        [AllureStep]
+        [AllureStep("Delete new job")]
         public void DeleteNewJob()
         {
             Thread.Sleep(2000);
@@ -76,7 +80,7 @@ namespace Diploma.BussinesObject
             driver.FindElement(DeletionConfirmation).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Error checking for an existing name job")]
         public void AddHRJob()
         {
             driver.FindElement(AddButton).Click();
@@ -86,9 +90,11 @@ namespace Diploma.BussinesObject
             driver.FindElement(SaveJob).Click();
 
             string ErrorMessageJob = driver.FindElement(ErrorMessage).Text;
-            string errorMessage = "Already exists";
             Thread.Sleep(2000);
-            Assert.AreEqual(ErrorMessageJob, errorMessage);
+            Assert.Fail(ErrorMessageJob);
+
+            logger.Info("Verify error message when adding an existing title job");
+            logger.Error("- error");
         }
     }
 }

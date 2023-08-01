@@ -6,7 +6,7 @@ using Diploma.PageStep;
 
 namespace Diploma.PageStep
 {
-    internal class Steps : BasePage
+    public class Steps : BasePage
     {
         private By AdminPage = By.XPath("//span[text()='Admin']");
         private By JobsPage = By.XPath("//span[text()='Job ']");
@@ -32,9 +32,11 @@ namespace Diploma.PageStep
             driver.FindElement(JobTitlesPage).Click();
         }
 
-        public void GivenEnterUsername()
+        public void GivenEnterUsername(IWebDriver driver)
         {
-            new LoginPage(driver).EnterUsername();
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.EnterUsername();
         }
+
     }
 }
