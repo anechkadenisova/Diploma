@@ -12,7 +12,7 @@ namespace Diploma.BussinesObject
     internal class LoginPage : BasePage
     {
         private By UserNameInput = By.XPath("//input[@name='username']");
-        private By PasswordInput = By.XPath("//input[@placeholder='password']");
+        private By PasswordInput = By.XPath("//input[@placeholder='Password']");
         private By ErrorMessage = By.CssSelector(".oxd-alert-content-text");
         private By LoginButtton = By.CssSelector(".oxd-button");
 
@@ -62,10 +62,8 @@ namespace Diploma.BussinesObject
         {
 
             logger.Info("Verify error message for incorrect data for login");
-            logger.Warn($"- warn");
-            logger.Debug($"- debug");
             logger.Error("- error");
-            logger.Fatal(" - fatal");
+
 
             try
             {

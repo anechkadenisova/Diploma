@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
+using NLog;
+
 
 namespace Diploma.BussinesObject
 {
@@ -19,6 +21,8 @@ namespace Diploma.BussinesObject
         private By ErrorMessage = By.CssSelector(".oxd-input-field-error-message");
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+
+        public static NLog.Logger logger = LogManager.GetCurrentClassLogger();
 
         public JobPage(IWebDriver webDriver) : base(webDriver)
         {
@@ -86,10 +90,11 @@ namespace Diploma.BussinesObject
             driver.FindElement(SaveJob).Click();
 
             string ErrorMessageJob = driver.FindElement(ErrorMessage).Text;
-            string errorMessage = "Already exists";
             Thread.Sleep(2000);
-            //Assert Fail?
-            Assert.AreEqual(ErrorMessageJob, errorMessage);
+            Assert.Fail(ErrorMessageJob);
+
+            logger.Info("Verify error message when adding an existing title job");
+            logger.Error("- error");
         }
     }
 }
