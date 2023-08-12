@@ -12,7 +12,7 @@ pool:
 
 steps:
 - task: NuGetCommand@2
-  displayName: 'Restore nuget package for Solution'
+  displayName: 'Restore nuget package for solution'
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
