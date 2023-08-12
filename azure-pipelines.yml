@@ -21,7 +21,7 @@ steps:
   displayName: 'Restore nuget package for Solution'
   inputs:
     command: 'restore'
-    restoreSolution: '$(solution)'
+    restoreSolution: '**/*.sln'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build solution'
@@ -30,7 +30,6 @@ steps:
     arguments: '--configuration Debug'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Dotnet test -s BrowserSetup.runsettings'
+  displayName: 'Run tests'
   inputs:
-    command: 'test' 
-    arguments: '-s BrowserSetup.runsettings'
+    command: 'test'
