@@ -8,7 +8,7 @@ trigger:
 
 
 pool:
-  name: 'Default'
+  name: 'Diploma'
 
 steps:
 - task: NuGetCommand@2
@@ -16,6 +16,7 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
+
 
 - task: DotNetCoreCLI@2
   displayName: 'Build solution'
