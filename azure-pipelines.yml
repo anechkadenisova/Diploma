@@ -8,7 +8,7 @@ trigger:
 
 
 pool:
-  name: 'Diploma'
+  name: 'Default'
 
 steps:
 - task: NuGetCommand@2
