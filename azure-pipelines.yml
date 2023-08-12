@@ -6,16 +6,16 @@
 trigger:
 - feature
 
-
 pool:
-  name: 'Anna'
+  name: 'Default'
 
 steps:
 - task: NuGetCommand@2
   displayName: 'Restore nuget package for solution'
   inputs:
     command: 'restore'
-    restoreSolution: '**/*.sln'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'select'
 
 
 - task: DotNetCoreCLI@2
@@ -25,6 +25,7 @@ steps:
     arguments: '--configuration Debug'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Run tests'
+  displayName: 'Dotnet test -s BrowserSetup.runsettings'
   inputs:
-    command: 'test'
+    command: 'test' 
+    arguments: '-s BrowserSetup.runsettings'
