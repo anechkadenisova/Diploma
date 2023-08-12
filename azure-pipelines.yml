@@ -4,21 +4,21 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- feature
 
 schedules:
 - cron: '0 0 * * *'
   displayName: Daily midnight build
   branches:
     include:
-    - master
+    - feature
 
 pool:
-  name: 'Default'
+  name: 'Diploma'
 
 steps:
 - task: NuGetCommand@2
-  displayName: 'Restore nuget package for'
+  displayName: 'Restore nuget package for Solution'
   inputs:
     command: 'restore'
     restoreSolution: '$(solution)'
@@ -30,6 +30,7 @@ steps:
     arguments: '--configuration Debug'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Run tests'
+  displayName: 'Dotnet test -s BrowserSetup.runsettings'
   inputs:
-    command: 'test'
+    command: 'test' 
+    arguments: '-s BrowserSetup.runsettings'
