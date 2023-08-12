@@ -14,7 +14,7 @@ schedules:
     - feature
 
 pool:
-  name: 'anechkadenisova.Diploma'
+  name: 'Default'
 
 steps:
 - task: NuGetCommand@2
