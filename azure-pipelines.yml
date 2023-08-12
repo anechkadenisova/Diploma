@@ -8,7 +8,7 @@ trigger:
 
 
 pool:
-  name: 'Azure Pipelines'
+  name: 'Anna'
 
 steps:
 - task: NuGetCommand@2
