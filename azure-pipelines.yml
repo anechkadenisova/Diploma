@@ -28,4 +28,4 @@ steps:
   displayName: 'Dotnet test -s BrowserSetup.runsettings'
   inputs:
     command: 'test' 
-    arguments: '-s BrowserSetup.runsettings'
+    arguments: '-s \Diploma\RunSettings\BrowserSetup.runsettings'
