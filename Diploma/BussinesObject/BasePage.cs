@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-
+using Diploma.Core;
 
 
 namespace Diploma.BussinesObject
@@ -8,9 +8,9 @@ namespace Diploma.BussinesObject
     {
         protected IWebDriver driver;
 
-        public BasePage(IWebDriver webDriver)
+        public BasePage()
         {
-            this.driver = webDriver;
+            driver = Browser.Instance.Driver;
         }
 
         public abstract BasePage OpenPage();

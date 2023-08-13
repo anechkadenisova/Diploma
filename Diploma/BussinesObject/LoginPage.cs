@@ -1,49 +1,43 @@
-﻿using BasePageObjectModel;
-using Diploma.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
+﻿using Diploma.Core;
 using NLog;
 using NUnit.Allure.Attributes;
-using NUnit.Framework.Internal;
 using OpenQA.Selenium;
-
+using Diploma.User;
 
 namespace Diploma.BussinesObject
 {
-    internal class LoginPage : BasePage
+    public class LoginPage : BasePage
     {
         private By UserNameInput = By.XPath("//input[@name='username']");
         private By PasswordInput = By.XPath("//input[@placeholder='Password']");
         private By ErrorMessage = By.CssSelector(".oxd-alert-content-text");
         private By LoginButtton = By.CssSelector(".oxd-button");
-
+        
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
-        public const string STANDART_USER_NAME = "Admin";
-        public const string STANDART_PASSWORD = "admin123";
 
         public static NLog.Logger logger = LogManager.GetCurrentClassLogger();
 
-        public LoginPage(IWebDriver webDriver) : base(webDriver)
+        public LoginPage()
         {
 
         }
 
+
         [AllureStep]
-        public override BasePage OpenPage()
+        public override LoginPage OpenPage()
         {
             logger.Info($"Navigate to url {url}");
-            driver.Navigate().GoToUrl(url);
+            Browser.Instance.NavigateToUrl(url);
             return this;
         }
 
         [AllureStep("Enter user name")]
         public void EnterUsername()
         {
-            var user = new UserModel()
-            {
-                Name = STANDART_USER_NAME,
-                Password = STANDART_PASSWORD
-            };
+            logger.Info($"LoginAsStandartUser");
+
+            var user = UserBuilder.GetStandartUser();
             TryToLogin(user);
 
         }

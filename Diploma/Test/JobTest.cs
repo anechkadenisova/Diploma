@@ -16,14 +16,13 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void AddJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
 
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.AddNewJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.AddNewJob();
+
 
         }
 
@@ -35,13 +34,11 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void ChangeJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.ChangeNewJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.ChangeNewJob();
         }
 
         [Test(Description = "Delete job Admin")]
@@ -52,13 +49,11 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void DeleteJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.DeleteNewJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.DeleteNewJob();
         }
 
         [Test(Description = "Fail on repeating name of job")]
@@ -69,15 +64,11 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void RepeatJobFail()
         {
-            Browser.Instance.NavigateToUrl("dfdf");
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.AddHRJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.AddHRJob();
         }
     }
 }
