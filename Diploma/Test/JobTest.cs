@@ -10,8 +10,8 @@ namespace Diploma.Test
     {
         [Test(Description = "Add new job Admin")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Add Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void AddJob()
@@ -28,8 +28,8 @@ namespace Diploma.Test
 
         [Test(Description = "Change job Admin - add file")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Change Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void ChangeJob()
@@ -43,8 +43,8 @@ namespace Diploma.Test
 
         [Test(Description = "Delete job Admin")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Delete Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void DeleteJob()
@@ -58,8 +58,8 @@ namespace Diploma.Test
 
         [Test(Description = "Fail on repeating name of job")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = fail")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void RepeatJobFail()

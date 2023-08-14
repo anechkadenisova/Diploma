@@ -11,8 +11,10 @@ namespace Diploma.Test
         [Test]
         [AllureDescription("Authorization test")]
         [AllureSeverity(Allure.Commons.SeverityLevel.critical)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("LoginPage = Authorization user")]
+        [AllureOwner("Anna Denisova")]
+        [AllureTms("TMS")]
+        [AllureIssue("Jira")]
         public void Login_StandartUser()
         {
             var user = UserBuilder.GetStandartUser();
@@ -24,8 +26,10 @@ namespace Diploma.Test
         [Test]
         [AllureDescription("Authorization fail test with wrong user")]
         [AllureSeverity(Allure.Commons.SeverityLevel.critical)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("LoginPage = wrong authorization")]
+        [AllureOwner("Anna Denisova")]
+        [AllureTms("TMS")]
+        [AllureIssue("Jira")]
         public void LoginFailTest()
         {
 

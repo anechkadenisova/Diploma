@@ -43,6 +43,7 @@ namespace Diploma.Core
                 {
                     driver = new ChromeDriver();
                 }
+
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
                 driver.Manage().Window.Maximize();
             }

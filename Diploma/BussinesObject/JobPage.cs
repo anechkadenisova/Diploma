@@ -25,7 +25,7 @@ namespace Diploma.BussinesObject
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
-        public static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+        public static Logger logger = LogManager.GetCurrentClassLogger();
 
         public JobPage()
         {
