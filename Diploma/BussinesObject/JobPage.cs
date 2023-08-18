@@ -1,16 +1,19 @@
 ﻿using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
 using NLog;
-
+using Diploma.Core;
+using NLog.Targets;
 
 namespace Diploma.BussinesObject
 {
     internal class JobPage : BasePage
     {
-
+        private By AdminPage = By.XPath("//span[text()='Admin']");
+        private By JobsPage = By.XPath("//span[text()='Job ']");
+        private By JobTitlesPage = By.XPath("//a[text()='Job Titles']");
         private By AddButton = By.CssSelector(".oxd-button--medium");
         private By SaveJob = By.CssSelector(".oxd-button--secondary");
-        private By JobTitle = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
+        private By TitleJob = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
         private By JobDescription = By.XPath("(//textarea[@placeholder='Type description here'])");
         private By Note = By.XPath("(//textarea[@placeholder='Add note'])");
         private By FieldAdmin = By.XPath("(//div[text()='Admin'])");
@@ -22,25 +25,33 @@ namespace Diploma.BussinesObject
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
-        public static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+        public static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public JobPage(IWebDriver webDriver) : base(webDriver)
+        public JobPage()
         {
 
         }
         public override JobPage OpenPage()
         {
-            driver.Navigate().GoToUrl(url);
+            Browser.Instance.NavigateToUrl(url);
             return this;
         }
 
+        [AllureStep("Page Job Title")]
+        public void JobTitle()
+        {
+            logger.Info("Navigate to Job Page");
+            driver.FindElement(AdminPage).Click();
+            driver.FindElement(JobsPage).Click();
+            driver.FindElement(JobTitlesPage).Click();
+        }
 
         [AllureStep("Add new job")]
         public void AddNewJob()
-    { 
+    {
+            logger.Info("Add new Job");
             driver.FindElement(AddButton).Click();
-
-            driver.FindElement(JobTitle).SendKeys("Admin");
+            driver.FindElement(TitleJob).SendKeys("Admin");
             driver.FindElement(JobDescription).SendKeys("test");
             driver.FindElement(Note).SendKeys("test");
 
@@ -51,6 +62,7 @@ namespace Diploma.BussinesObject
         [AllureStep("Change new job")]
         public void ChangeNewJob()
         {
+            logger.Info("Change new Job: Download File");
             Thread.Sleep(2000);
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement editElement = textElement.FindElement(EditIcon);
@@ -64,7 +76,7 @@ namespace Diploma.BussinesObject
 
             fileInput.SendKeys(fullPath);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             driver.FindElement(SaveJob).Click();
 
         }
@@ -72,6 +84,7 @@ namespace Diploma.BussinesObject
         [AllureStep("Delete new job")]
         public void DeleteNewJob()
         {
+            logger.Info("Delete new Job");
             Thread.Sleep(2000);
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement delElement = textElement.FindElement(DeleteIcon);
@@ -85,7 +98,7 @@ namespace Diploma.BussinesObject
         {
             driver.FindElement(AddButton).Click();
 
-            driver.FindElement(JobTitle).SendKeys("Finance Manager");
+            driver.FindElement(TitleJob).SendKeys("Finance Manager");
 
             driver.FindElement(SaveJob).Click();
 

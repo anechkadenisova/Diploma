@@ -1,23 +1,20 @@
 ﻿using Allure.Commons;
-using Diploma.BussinesObject;
 using NUnit.Allure.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 
 namespace Diploma.Core
 {
+    [TestFixture]
     [AllureNUnit]
     public class BaseTest
     {
         private AllureLifecycle allure;
-        protected IWebDriver driver = Browser.Instance.Driver;
 
         [SetUp]
 
         public void SetUp()
         {
-            driver = Browser.Instance.Driver;
             allure = AllureLifecycle.Instance;
         }
 

@@ -3,40 +3,22 @@ using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using Diploma.Core;
 using Diploma.PageStep;
+using Diploma.User;
 
 namespace Diploma.PageStep
 {
-    public class Steps : BasePage
+    public class Steps
     {
-        private By AdminPage = By.XPath("//span[text()='Admin']");
-        private By JobsPage = By.XPath("//span[text()='Job ']");
-        private By JobTitlesPage = By.XPath("//a[text()='Job Titles']");
-
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-
-        public Steps(IWebDriver webDriver) : base(webDriver)
+        public static LoginPage Login(UserModel user)
         {
-
-        }
-        public override Steps OpenPage()
-        {
-            driver.Navigate().GoToUrl(url);
-            return this;
+            new LoginPage().
+                OpenPage().
+                TryToLogin(user);
+            return new LoginPage();
         }
 
-        [AllureStep("Page Job Title")]
-        public void JobTitle()
-        {
-            driver.FindElement(AdminPage).Click();
-            driver.FindElement(JobsPage).Click();
-            driver.FindElement(JobTitlesPage).Click();
-        }
-
-        public void GivenEnterUsername(IWebDriver driver)
-        {
-            LoginPage loginPage = new LoginPage(driver);
-            loginPage.EnterUsername();
         }
 
     }
-}
+
+

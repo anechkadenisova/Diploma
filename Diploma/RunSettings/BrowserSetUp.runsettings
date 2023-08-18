@@ -4,5 +4,8 @@
 		<Parameter name="Headless" value="true"/>
 		<Parameter name="BrowsType" value="Chrome"/>
 		<Parameter name="ImplicityWait" value="10"/>
+		<Parameter name="Url" value="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"/>
+		<Parameter name="StandartUserName" value="Admin"/>
+		<Parameter name="StandartUserPassword" value="admin123"/>
 	</TestRunParameters>
 </RunSettings>
