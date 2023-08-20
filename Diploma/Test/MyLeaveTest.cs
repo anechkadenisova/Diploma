@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace Diploma.Test
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.Fixtures)]
     internal class MyLeaveTest : BaseTest
     {
         [Test(Description = "Add comment in MyLeave page")]

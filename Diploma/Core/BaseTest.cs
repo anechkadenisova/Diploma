@@ -1,6 +1,7 @@
 ﻿using Allure.Commons;
 using NUnit.Allure.Core;
 using OpenQA.Selenium;
+using NUnit.Framework;
 
 
 namespace Diploma.Core

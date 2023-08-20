@@ -24,8 +24,8 @@ namespace Diploma.BussinesObject
         private By SubUnitDropdown = By.XPath("//label[text()='Sub Unit']/following::div[@class='oxd-select-text-input']");
         private By LeaveTypeDropdown = By.XPath("//label[text()='Leave Type']/following::div[@class='oxd-select-text-input']");
         private By Entitlement = By.XPath("//label[text()='Entitlement']/following::input[@class='oxd-input oxd-input--active']");
-        private By Submit = By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']");
-        private By UpdatingSubmit = By.XPath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']");
+        private By Submit = By.XPath("(//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space'])[1]");
+        private By UpdatingSubmit = By.XPath("(//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space'])[2]");
 
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";

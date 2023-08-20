@@ -2,63 +2,103 @@
 using OpenQA.Selenium.Chrome;
 using Diploma.Core;
 using OpenQA.Selenium.Interactions;
+using NUnit.Framework;
 
 namespace Diploma.Core
 {
-          public class Browser
+    public class Browser
+    {
+        private static Browser? instance;
+
+        protected IWebDriver driver;
+        public IWebDriver Driver { get { return driver; } }
+
+        public static Browser Instance
         {
-            private static Browser? instance;
-
-            protected IWebDriver driver;
-            public IWebDriver Driver { get { return driver; } }
-
-            public static Browser Instance
+            get
             {
-                get
+                if (instance == null)
                 {
-                    if (instance == null)
-                    {
-                        instance = new Browser();
-                    }
-                    return instance;
+                    instance = new Browser();
                 }
+                return instance;
             }
+        }
 
-            private Browser()
+        private Browser()
+        {
+            var isHeadless = bool.Parse(TestContext.Parameters.Get("Headless"));
+            var wait = int.Parse(TestContext.Parameters.Get("ImplicityWait"));
+
+            if (isHeadless)
             {
-                var isHeadless = bool.Parse(TestContext.Parameters.Get("Headless"));
-                var wait = int.Parse(TestContext.Parameters.Get("ImplicityWait"));
+                ChromeOptions options = new ChromeOptions();
+                options.AddArgument("--headless");
+                options.AddArgument("--disable-gpu");
+                options.AddArgument("incodnito");
+                options.AddArgument("--start-maximized");
 
-                if (isHeadless)
-                {
-                    ChromeOptions options = new ChromeOptions();
-                    options.AddArgument("--headless");
-                    options.AddArgument("--disable-gpu");
-                    options.AddArgument("incodnito");
-                    options.AddArgument("--start-maximized");
-
-                    driver = new ChromeDriver(options);
-                }
-                else
-                {
-                    driver = new ChromeDriver();
-                }
-
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
-                driver.Manage().Window.Maximize();
+                driver = new ChromeDriver(options);
             }
-
-            public void NavigateToUrl(string url)
+            else
             {
-                driver.Navigate().GoToUrl(url);
+                driver = new ChromeDriver();
             }
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
+            driver.Manage().Window.Maximize();
+        }
 
-            public void CloseBrowser()
+        public void NavigateToUrl(string url)
+        {
+            driver.Navigate().GoToUrl(url);
+        }
+
+
+        public void CloseBrowser()
+        {
+            driver?.Dispose();
+            instance = null;
+        }
+        public void AcceptAllert()
+        {
+            driver.SwitchTo().Alert().Accept();
+        }
+
+        public void AcceptDismiss()
+        {
+            driver.SwitchTo().Alert().Dismiss();
+        }
+
+        public void SwitchToFrame(string id)
+        {
+            driver.SwitchTo().Frame(id);
+        }
+
+        public void SwitchToDefault()
+        {
+            driver.SwitchTo().DefaultContent();
+        }
+
+        public void ContextClickToElement(IWebElement element)
+        {
+            new Actions(driver)
+                .ContextClick(element)
+                .Build()
+                .Perform();
+        }
+
+        public object ExecuteScript(string scipt, object argument = null)
+        {
+            try
             {
-                driver?.Dispose();
-                instance = null;
-            }
 
+                return ((IJavaScriptExecutor)driver).ExecuteScript(scipt, argument);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
+}
