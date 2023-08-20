@@ -88,17 +88,5 @@ namespace Diploma.Core
                 .Perform();
         }
 
-        public object ExecuteScript(string scipt, object argument = null)
-        {
-            try
-            {
-
-                return ((IJavaScriptExecutor)driver).ExecuteScript(scipt, argument);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
     }
 }

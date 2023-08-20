@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 namespace Diploma.Test
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.Fixtures)]
+  //  [Parallelizable(ParallelScope.Fixtures)]
     public class LoginTest : BaseTest
     {
         [Test]
