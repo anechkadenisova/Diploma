@@ -40,7 +40,7 @@ namespace Diploma.Test
         [AllureTms("TMS")]
         [AllureOwner("Anna Denisova")]
         [AllureIssue("Jira")]
-        public void ChechComments()
+        public void CheckComments()
         {
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);

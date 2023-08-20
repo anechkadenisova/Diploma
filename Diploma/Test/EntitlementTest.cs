@@ -18,7 +18,7 @@ namespace Diploma.Test
         [AllureTms("TMS")]
         [AllureOwner("Anna Denisova")]
         [AllureIssue("Jira")]
-        public void addLeaveEntitlement()
+        public void AddLeaveEntitlement()
         {
 
             var user = UserBuilder.GetStandartUser();
