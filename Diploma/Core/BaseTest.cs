@@ -29,6 +29,7 @@ namespace Diploma.Core
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
 
+            Browser.Instance.Driver.Quit();
             Browser.Instance.CloseBrowser();
 
         }

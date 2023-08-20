@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <RunSettings>
 	<TestRunParameters>
-		<Parameter name="Headless" value="false"/>
+		<Parameter name="Headless" value="true"/>
 		<Parameter name="BrowsType" value="Chrome"/>
 		<Parameter name="ImplicityWait" value="10"/>
 		<Parameter name="Url" value="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"/>
