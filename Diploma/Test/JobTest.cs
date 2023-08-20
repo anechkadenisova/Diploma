@@ -6,6 +6,8 @@ using NUnit.Allure.Attributes;
 
 namespace Diploma.Test
 {
+    [TestFixture]
+   // [Parallelizable(ParallelScope.Fixtures)]
     public class JobTest : BaseTest
     {
         [Test(Description = "Add new job Admin")]

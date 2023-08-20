@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace Diploma.Test
 {
+    [TestFixture]
+   // [Parallelizable(ParallelScope.Fixtures)]
     internal class MyLeaveTest : BaseTest
     {
         [Test(Description = "Add comment in MyLeave page")]
@@ -38,7 +40,7 @@ namespace Diploma.Test
         [AllureTms("TMS")]
         [AllureOwner("Anna Denisova")]
         [AllureIssue("Jira")]
-        public void ChechComments()
+        public void CheckComments()
         {
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);

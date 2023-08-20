@@ -1,6 +1,7 @@
 ﻿using Allure.Commons;
 using NUnit.Allure.Core;
 using OpenQA.Selenium;
+using NUnit.Framework;
 
 
 namespace Diploma.Core
@@ -28,6 +29,7 @@ namespace Diploma.Core
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
 
+            Browser.Instance.Driver.Quit();
             Browser.Instance.CloseBrowser();
 
         }

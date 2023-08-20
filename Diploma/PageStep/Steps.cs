@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using Diploma.Core;
 using Diploma.PageStep;
 using Diploma.User;
+using NUnit.Framework;
 
 namespace Diploma.PageStep
 {
