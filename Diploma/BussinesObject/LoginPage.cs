@@ -13,7 +13,7 @@ namespace Diploma.BussinesObject
         private By ErrorMessage = By.CssSelector(".oxd-alert-content-text");
         private By LoginButtton = By.CssSelector(".oxd-button");
 
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        public string url = TestContext.Parameters.Get("Url");
 
         public static Logger logger = LogManager.GetCurrentClassLogger();
 

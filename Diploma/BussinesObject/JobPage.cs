@@ -30,7 +30,7 @@ namespace Diploma.BussinesObject
         public By updateMessage => UpdateMessage;
         public By deleteMessage => DeleteMessage;
 
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        public string url = TestContext.Parameters.Get("Url");
 
         public static Logger logger = LogManager.GetCurrentClassLogger();
 

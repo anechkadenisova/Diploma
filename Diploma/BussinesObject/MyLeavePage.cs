@@ -2,6 +2,7 @@
 using NLog;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
+using Diploma.BussinesObject;
 
 namespace Diploma.BussinesObject
 {
@@ -21,7 +22,7 @@ namespace Diploma.BussinesObject
         public By successMessage => SucceessMessage;
         public By okMessage => OkMessage;
 
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        public string url = TestContext.Parameters.Get("Url");
 
         public static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -46,10 +47,8 @@ namespace Diploma.BussinesObject
         {
             logger.Info("Add new comment in Leave List: OK");
             driver.FindElement(ThreeDots).Click();
-            Thread.Sleep(2000);
             driver.FindElement(AddComment).Click();
             driver.FindElement(TitleComment).SendKeys("OK");
-            Thread.Sleep(1000);
             driver.FindElement(SaveButton).Click();
         }
 
