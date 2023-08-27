@@ -13,7 +13,6 @@ namespace Diploma.Core
         private AllureLifecycle allure;
 
         [SetUp]
-
         public void SetUp()
         {
             allure = AllureLifecycle.Instance;
@@ -31,7 +30,6 @@ namespace Diploma.Core
 
             Browser.Instance.Driver.Quit();
             Browser.Instance.CloseBrowser();
-
         }
     }
 }

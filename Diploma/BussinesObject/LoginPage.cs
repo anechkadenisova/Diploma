@@ -12,17 +12,14 @@ namespace Diploma.BussinesObject
         private By PasswordInput = By.XPath("//input[@placeholder='Password']");
         private By ErrorMessage = By.CssSelector(".oxd-alert-content-text");
         private By LoginButtton = By.CssSelector(".oxd-button");
-        
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
+        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
         public static Logger logger = LogManager.GetCurrentClassLogger();
 
         public LoginPage()
         {
-
         }
-
 
         [AllureStep]
         public override LoginPage OpenPage()
@@ -36,10 +33,8 @@ namespace Diploma.BussinesObject
         public void EnterUsername()
         {
             logger.Info($"LoginAsStandartUser");
-
             var user = UserBuilder.GetStandartUser();
             TryToLogin(user);
-
         }
 
         [AllureStep("Enter user nameTry to  login")]
@@ -57,8 +52,6 @@ namespace Diploma.BussinesObject
 
             logger.Info("Verify error message for incorrect data for login");
             logger.Error("- error");
-
-
             try
             {
                 WebElement errormessage = (WebElement)driver.FindElement(ErrorMessage);
@@ -70,7 +63,5 @@ namespace Diploma.BussinesObject
                 Assert.Pass("Successful authorization");
             }
         }
-
-
     }
 }

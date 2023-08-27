@@ -2,18 +2,10 @@
 using NLog;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Diploma.BussinesObject
 {
     internal class MyLeavePage : BasePage
-
     {
         private By LeaveMenu = By.XPath("//span[text()='Leave']");
         private By MyLeave = By.XPath("//a[text()='My Leave']");
@@ -23,8 +15,11 @@ namespace Diploma.BussinesObject
         private By SaveButton = By.XPath("//button[text()=' Save ']");
         private By LaveDetails = By.XPath("//p[text()='View Leave Details']");
         private By CommentsButton = By.CssSelector(".oxd-button--secondary");
+        private By SucceessMessage = By.XPath("//p[text()='Successfully Saved']");
+        private By OkMessage= By.XPath("//p[text()='OK']");
 
-
+        public By successMessage => SucceessMessage;
+        public By okMessage => OkMessage;
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
@@ -32,7 +27,6 @@ namespace Diploma.BussinesObject
 
         public MyLeavePage()
         {
-
         }
         public override MyLeavePage OpenPage()
         {
@@ -52,11 +46,11 @@ namespace Diploma.BussinesObject
         {
             logger.Info("Add new comment in Leave List: OK");
             driver.FindElement(ThreeDots).Click();
+            Thread.Sleep(2000);
             driver.FindElement(AddComment).Click();
             driver.FindElement(TitleComment).SendKeys("OK");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             driver.FindElement(SaveButton).Click();
-            Thread.Sleep(2000);
         }
 
         [AllureStep("Chech comment in MyLeave List: OK")]
@@ -66,8 +60,6 @@ namespace Diploma.BussinesObject
             driver.FindElement(ThreeDots).Click();
             driver.FindElement(LaveDetails).Click();
             driver.FindElement(CommentsButton).Click();
-            Assert.IsNotNull(Browser.Instance.Driver.FindElement(By.XPath("//p[text()='OK']")));
         }
- 
     }
 }

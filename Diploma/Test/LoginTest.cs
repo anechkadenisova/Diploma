@@ -3,6 +3,7 @@ using Diploma.Core;
 using Diploma.PageStep;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
+using NUnit.Framework;
 
 namespace Diploma.Test
 {
@@ -21,8 +22,7 @@ namespace Diploma.Test
         {
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);
-
-
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(By.XPath("//span[text()='Dashboard']")));
         }
 
         [Test]
@@ -34,13 +34,10 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void LoginFailTest()
         {
-
-
             var user = UserBuilder.GetUnknownUser();
             Steps.Login(user);
             var page = new LoginPage();
             page.VerifyErrorMessage();
         }
-
     }
  }

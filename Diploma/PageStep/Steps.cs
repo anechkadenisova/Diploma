@@ -17,9 +17,7 @@ namespace Diploma.PageStep
                 TryToLogin(user);
             return new LoginPage();
         }
-
-        }
-
     }
+ }
 
 

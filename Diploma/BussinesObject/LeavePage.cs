@@ -26,7 +26,12 @@ namespace Diploma.BussinesObject
         private By Entitlement = By.XPath("//label[text()='Entitlement']/following::input[@class='oxd-input oxd-input--active']");
         private By Submit = By.XPath("(//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space'])[1]");
         private By UpdatingSubmit = By.XPath("(//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space'])[2]");
+        private By LocationText = By.XPath("//*[text()='Texas R&D']");
+        private By SubUnitText = By.XPath("//*[text()='Engineering']");
+        private By LeaveTypeText = By.XPath("//*[text()='US - Personal']");
+        private By LeavePage = By.XPath("//h5[text()='Leave Entitlements']");
 
+        public By leavePage => LeavePage;
 
         public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
 
@@ -34,13 +39,13 @@ namespace Diploma.BussinesObject
 
         public EntitlementPage()
         {
-
         }
         public override EntitlementPage OpenPage()
         {
             Browser.Instance.NavigateToUrl(url);
             return this;
         }
+
         [AllureStep("Navigate to Dashboard: Leave List")]
         public void LeaveNavigateDashboard()
         {
@@ -51,33 +56,35 @@ namespace Diploma.BussinesObject
         [AllureStep("Add new entitlement")]
         public void AddedEntitlement()
         {
+            Random random = new Random();
+            int numbers = random.Next(1, 5);
+
             logger.Info("Add new entitlement: Multiple Employees");
             driver.FindElement(Entitlements).Click();
             driver.FindElement(AddEntitlements).Click();
             driver.FindElement(MultipleEmployees).Click();;
             IWebElement locationDropdown = driver.FindElement(LocationDropdown);
             locationDropdown.Click();
-            IWebElement locationText = driver.FindElement(By.XPath("//*[text()='Texas R&D']"));
+            IWebElement locationText = driver.FindElement(LocationText);
             locationText.Click();
 
             IWebElement subUnitDropdown = driver.FindElement(SubUnitDropdown);
             subUnitDropdown.Click();
-            IWebElement subUnitText = driver.FindElement(By.XPath("//*[text()='Engineering']"));
+            IWebElement subUnitText = driver.FindElement(SubUnitText);
             subUnitText.Click();
 
 
             IWebElement leaveTypeDropdown = driver.FindElement(LeaveTypeDropdown);
             leaveTypeDropdown.Click();
-            IWebElement leaveTypeText = driver.FindElement(By.XPath("//*[text()='US - Personal']"));
+            IWebElement leaveTypeText = driver.FindElement(LeaveTypeText);
             leaveTypeText.Click();
 
             IWebElement entitlement = driver.FindElement(Entitlement);
             entitlement.Click();
-            entitlement.SendKeys("14");
+            entitlement.SendKeys(""+numbers);
 
             IWebElement submit = driver.FindElement(Submit);
             submit.Click();
-
             IWebElement updatingSubmit = driver.FindElement(UpdatingSubmit);
             updatingSubmit.Click();
         }

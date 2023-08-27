@@ -1,13 +1,10 @@
 ﻿using Diploma.BussinesObject;
 using Diploma.Core;
 using Diploma.PageStep;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Diploma.Test
 {
@@ -23,14 +20,12 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void AnnMyLeaveList()
         {
-
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);
             var page = new MyLeavePage();
             page.LeaveNavigate();
             page.AddComments();
-            Assert.IsNotNull(Browser.Instance.Driver.FindElement(By.XPath("//p[text()='Successfully Saved']")));
-
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.successMessage));
 
         }
 
@@ -47,8 +42,7 @@ namespace Diploma.Test
             var page = new MyLeavePage();
             page.LeaveNavigate();
             page.CheckComment();
-
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.okMessage));
         }
-        
     }
 }

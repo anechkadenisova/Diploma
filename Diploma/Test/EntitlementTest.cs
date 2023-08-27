@@ -2,11 +2,8 @@
 using Diploma.Core;
 using Diploma.PageStep;
 using NUnit.Allure.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium;
+
 
 namespace Diploma.Test
 {
@@ -20,14 +17,12 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void AddLeaveEntitlement()
         {
-
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);
             var page = new EntitlementPage();
             page.LeaveNavigateDashboard();
             page.AddedEntitlement();
-
-
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.leavePage));
         }
-}
+    }
 }

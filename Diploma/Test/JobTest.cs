@@ -2,7 +2,7 @@
 using Diploma.Core;
 using Diploma.PageStep;
 using NUnit.Allure.Attributes;
-
+using OpenQA.Selenium;
 
 namespace Diploma.Test
 {
@@ -18,14 +18,12 @@ namespace Diploma.Test
         [AllureIssue("Jira")]
         public void AddJob()
         {
-
             var user = UserBuilder.GetStandartUser();
             Steps.Login(user);
             var page = new JobPage();
             page.JobTitle();
             page.AddNewJob();
-
-
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.successMessage));
         }
 
         [Test(Description = "Change job Admin - add file")]
@@ -41,6 +39,7 @@ namespace Diploma.Test
             var page = new JobPage();
             page.JobTitle();
             page.ChangeNewJob();
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.updateMessage));
         }
 
         [Test(Description = "Delete job Admin")]
@@ -56,6 +55,7 @@ namespace Diploma.Test
             var page = new JobPage();
             page.JobTitle();
             page.DeleteNewJob();
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.deleteMessage));
         }
 
         [Test(Description = "Fail on repeating name of job")]

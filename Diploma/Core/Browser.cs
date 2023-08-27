@@ -54,30 +54,10 @@ namespace Diploma.Core
             driver.Navigate().GoToUrl(url);
         }
 
-
         public void CloseBrowser()
         {
             driver?.Dispose();
             instance = null;
-        }
-        public void AcceptAllert()
-        {
-            driver.SwitchTo().Alert().Accept();
-        }
-
-        public void AcceptDismiss()
-        {
-            driver.SwitchTo().Alert().Dismiss();
-        }
-
-        public void SwitchToFrame(string id)
-        {
-            driver.SwitchTo().Frame(id);
-        }
-
-        public void SwitchToDefault()
-        {
-            driver.SwitchTo().DefaultContent();
         }
 
         public void ContextClickToElement(IWebElement element)
@@ -87,6 +67,5 @@ namespace Diploma.Core
                 .Build()
                 .Perform();
         }
-
     }
 }
