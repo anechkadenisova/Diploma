@@ -1,37 +1,43 @@
 ﻿using Diploma.BussinesObject;
 using Diploma.Core;
 using Diploma.PageStep;
+using NUnit.Allure.Attributes;
+using OpenQA.Selenium;
+using NUnit.Framework;
 
 namespace Diploma.Test
 {
+    [TestFixture]
+  //  [Parallelizable(ParallelScope.Fixtures)]
     public class LoginTest : BaseTest
     {
         [Test]
+        [AllureDescription("Authorization test")]
+        [AllureSeverity(Allure.Commons.SeverityLevel.critical)]
+        [AllureSubSuite("LoginPage = Authorization user")]
+        [AllureOwner("Anna Denisova")]
+        [AllureTms("TMS")]
+        [AllureIssue("Jira")]
         public void Login_StandartUser()
         {
-            Browser.Instance.NavigateToUrl("orangehrmlive");
-
-            var page = new LoginPage(driver);
-            page.EnterUsername();
-
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(By.XPath("//span[text()='Dashboard']")));
         }
 
         [Test]
+        [AllureDescription("Authorization fail test with wrong user")]
+        [AllureSeverity(Allure.Commons.SeverityLevel.critical)]
+        [AllureSubSuite("LoginPage = wrong authorization")]
+        [AllureOwner("Anna Denisova")]
+        [AllureTms("TMS")]
+        [AllureIssue("Jira")]
         public void LoginFailTest()
         {
-            var page = new LoginPage(driver);
-
-            page.OpenPage();
-            var user = new UserModel()
-            {
-                Name = "Test",
-                Password = "test"
-            };
-
-            page.TryToLogin(user);
+            var user = UserBuilder.GetUnknownUser();
+            Steps.Login(user);
+            var page = new LoginPage();
             page.VerifyErrorMessage();
-
         }
-
     }
  }

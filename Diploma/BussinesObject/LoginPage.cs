@@ -1,60 +1,57 @@
-﻿using BasePageObjectModel;
-using Diploma.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
+﻿using Diploma.Core;
+using NLog;
 using NUnit.Allure.Attributes;
-using NUnit.Framework.Internal;
 using OpenQA.Selenium;
-
-
+using Diploma.User;
 
 namespace Diploma.BussinesObject
 {
-    internal class LoginPage : BasePage
+    public class LoginPage : BasePage
     {
         private By UserNameInput = By.XPath("//input[@name='username']");
         private By PasswordInput = By.XPath("//input[@placeholder='Password']");
         private By ErrorMessage = By.CssSelector(".oxd-alert-content-text");
         private By LoginButtton = By.CssSelector(".oxd-button");
 
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        public string url = TestContext.Parameters.Get("Url");
 
-        public const string STANDART_USER_NAME = "Admin";
-        public const string STANDART_PASSWORD = "admin123";
+        public static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public LoginPage(IWebDriver webDriver) : base(webDriver)
+        public LoginPage()
         {
-
         }
 
         [AllureStep]
-        public override BasePage OpenPage()
+        public override LoginPage OpenPage()
         {
-            driver.Navigate().GoToUrl(url);
+            logger.Info($"Navigate to url {url}");
+            Browser.Instance.NavigateToUrl(url);
             return this;
         }
 
-        [AllureStep]
+        [AllureStep("Enter user name")]
         public void EnterUsername()
         {
-            var user = new UserModel()
-            {
-                Name = STANDART_USER_NAME,
-                Password = STANDART_PASSWORD
-            };
+            logger.Info($"LoginAsStandartUser");
+            var user = UserBuilder.GetStandartUser();
             TryToLogin(user);
-
         }
 
-        [AllureStep]
+        [AllureStep("Enter user nameTry to  login")]
         public void TryToLogin(UserModel user)
         {
+            logger.Info($"Try to login like user {user.ToString()}");
             driver.FindElement(UserNameInput).SendKeys(user.Name);
             driver.FindElement(PasswordInput).SendKeys(user.Password);
             driver.FindElement(LoginButtton).Click();
         }
-        [AllureStep]
+       
+        [AllureStep("Authorisation Error")]
         public void VerifyErrorMessage()
         {
+
+            logger.Info("Verify error message for incorrect data for login");
+            logger.Error("- error");
             try
             {
                 WebElement errormessage = (WebElement)driver.FindElement(ErrorMessage);
@@ -66,7 +63,5 @@ namespace Diploma.BussinesObject
                 Assert.Pass("Successful authorization");
             }
         }
-
-
     }
 }

@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-
+using Diploma.Core;
+using OpenQA.Selenium.Interactions;
+using NUnit.Framework;
 
 namespace Diploma.Core
 {
@@ -42,15 +44,15 @@ namespace Diploma.Core
             {
                 driver = new ChromeDriver();
             }
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(wait);
             driver.Manage().Window.Maximize();
         }
 
         public void NavigateToUrl(string url)
         {
-            driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+            driver.Navigate().GoToUrl(url);
         }
-
 
         public void CloseBrowser()
         {
@@ -58,5 +60,12 @@ namespace Diploma.Core
             instance = null;
         }
 
+        public void ContextClickToElement(IWebElement element)
+        {
+            new Actions(driver)
+                .ContextClick(element)
+                .Build()
+                .Perform();
+        }
     }
 }

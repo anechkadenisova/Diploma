@@ -1,14 +1,19 @@
 ﻿using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
+using NLog;
+using Diploma.Core;
+using NLog.Targets;
 
 namespace Diploma.BussinesObject
 {
     internal class JobPage : BasePage
     {
-
+        private By AdminPage = By.XPath("//span[text()='Admin']");
+        private By JobsPage = By.XPath("//span[text()='Job ']");
+        private By JobTitlesPage = By.XPath("//a[text()='Job Titles']");
         private By AddButton = By.CssSelector(".oxd-button--medium");
         private By SaveJob = By.CssSelector(".oxd-button--secondary");
-        private By JobTitle = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
+        private By TitleJob = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
         private By JobDescription = By.XPath("(//textarea[@placeholder='Type description here'])");
         private By Note = By.XPath("(//textarea[@placeholder='Add note'])");
         private By FieldAdmin = By.XPath("(//div[text()='Admin'])");
@@ -17,41 +22,56 @@ namespace Diploma.BussinesObject
         private By DownloadFile = By.XPath("//input[@type='file']");
         private By DeletionConfirmation = By.CssSelector(".oxd-button--label-danger");
         private By ErrorMessage = By.CssSelector(".oxd-input-field-error-message");
+        private By SucceessMessage = By.XPath("//p[text()='Successfully Saved']");
+        private By UpdateMessage = By.XPath("//p[text()='Successfully Updated']");
+        private By DeleteMessage = By.XPath("//p[text()='Successfully Deleted']");
 
-        public const string url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        public By successMessage => SucceessMessage;
+        public By updateMessage => UpdateMessage;
+        public By deleteMessage => DeleteMessage;
 
-        public JobPage(IWebDriver webDriver) : base(webDriver)
+        public string url = TestContext.Parameters.Get("Url");
+
+        public static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public JobPage()
         {
-
         }
         public override JobPage OpenPage()
         {
-            driver.Navigate().GoToUrl(url);
+            Browser.Instance.NavigateToUrl(url);
             return this;
         }
 
+        [AllureStep("Page Job Title")]
+        public void JobTitle()
+        {
+            logger.Info("Navigate to Job Page");
+            driver.FindElement(AdminPage).Click();
+            driver.FindElement(JobsPage).Click();
+            driver.FindElement(JobTitlesPage).Click();
+        }
 
-        [AllureStep]
+        [AllureStep("Add new job")]
         public void AddNewJob()
-    { 
-            driver.FindElement(AddButton).Click();
+        {
+            logger.Info("Add new Job");
 
-            driver.FindElement(JobTitle).SendKeys("Admin");
+            driver.FindElement(AddButton).Click();
+            driver.FindElement(TitleJob).SendKeys("Admin");
             driver.FindElement(JobDescription).SendKeys("test");
             driver.FindElement(Note).SendKeys("test");
-
-            Thread.Sleep(2000);
             driver.FindElement(SaveJob).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Change new job")]
         public void ChangeNewJob()
         {
-            Thread.Sleep(2000);
+            logger.Info("Change new Job: Download File");
+
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement editElement = textElement.FindElement(EditIcon);
             editElement.Click();
-
             IWebElement fileInput = driver.FindElement(DownloadFile);
 
             var path = Environment.CurrentDirectory;
@@ -59,36 +79,32 @@ namespace Diploma.BussinesObject
             var fullPath = path + filePath;
 
             fileInput.SendKeys(fullPath);
-
-            Thread.Sleep(2000);
             driver.FindElement(SaveJob).Click();
-
         }
 
-        [AllureStep]
+        [AllureStep("Delete new job")]
         public void DeleteNewJob()
         {
-            Thread.Sleep(2000);
+            logger.Info("Delete new Job");
+
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement delElement = textElement.FindElement(DeleteIcon);
             delElement.Click();
-            Thread.Sleep(1000);
             driver.FindElement(DeletionConfirmation).Click();
         }
 
-        [AllureStep]
+        [AllureStep("Error checking for an existing name job")]
         public void AddHRJob()
         {
             driver.FindElement(AddButton).Click();
-
-            driver.FindElement(JobTitle).SendKeys("Finance Manager");
-
+            driver.FindElement(TitleJob).SendKeys("Finance Manager");
             driver.FindElement(SaveJob).Click();
 
             string ErrorMessageJob = driver.FindElement(ErrorMessage).Text;
-            string errorMessage = "Already exists";
-            Thread.Sleep(2000);
-            Assert.AreEqual(ErrorMessageJob, errorMessage);
+            Assert.Fail(ErrorMessageJob);
+
+            logger.Info("Verify error message when adding an existing title job");
+            logger.Error("- error");
         }
     }
 }

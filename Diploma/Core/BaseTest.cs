@@ -1,23 +1,20 @@
 ﻿using Allure.Commons;
-using Diploma.BussinesObject;
 using NUnit.Allure.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using NUnit.Framework;
 
 
 namespace Diploma.Core
 {
+    [TestFixture]
     [AllureNUnit]
     public class BaseTest
     {
         private AllureLifecycle allure;
-        protected IWebDriver driver = Browser.Instance.Driver;
 
         [SetUp]
-
         public void SetUp()
         {
-            driver = Browser.Instance.Driver;
             allure = AllureLifecycle.Instance;
         }
 
@@ -31,8 +28,8 @@ namespace Diploma.Core
                 allure.AddAttachment("Screenshot", "image/png", bytes);
             }
 
+            Browser.Instance.Driver.Quit();
             Browser.Instance.CloseBrowser();
-
         }
     }
 }

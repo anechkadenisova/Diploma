@@ -2,82 +2,75 @@
 using Diploma.Core;
 using Diploma.PageStep;
 using NUnit.Allure.Attributes;
-
+using OpenQA.Selenium;
 
 namespace Diploma.Test
 {
+    [TestFixture]
+   // [Parallelizable(ParallelScope.Fixtures)]
     public class JobTest : BaseTest
     {
         [Test(Description = "Add new job Admin")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Add Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void AddJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.AddNewJob();
-
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.AddNewJob();
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.successMessage));
         }
 
         [Test(Description = "Change job Admin - add file")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Change Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void ChangeJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.ChangeNewJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.ChangeNewJob();
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.updateMessage));
         }
 
         [Test(Description = "Delete job Admin")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = Delete Job")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void DeleteJob()
         {
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.DeleteNewJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.DeleteNewJob();
+            Assert.IsNotNull(Browser.Instance.Driver.FindElement(page.deleteMessage));
         }
 
         [Test(Description = "Fail on repeating name of job")]
         [AllureSeverity(Allure.Commons.SeverityLevel.normal)]
-        [AllureSuite("Unit")]
         [AllureSubSuite("JobTitle = fail")]
+        [AllureOwner("Anna Denisova")]
         [AllureTms("TMS")]
         [AllureIssue("Jira")]
         public void RepeatJobFail()
         {
-            Browser.Instance.NavigateToUrl("dfdf");
-            var page = new LoginPage(driver);
-            page.OpenPage();
-            page.EnterUsername();
-
-            var pageJob = new JobPage(driver);
-            var pagestep = new Steps(driver);
-            pagestep.JobTitle();
-            pageJob.AddHRJob();
+            var user = UserBuilder.GetStandartUser();
+            Steps.Login(user);
+            var page = new JobPage();
+            page.JobTitle();
+            page.AddHRJob();
         }
     }
 }
