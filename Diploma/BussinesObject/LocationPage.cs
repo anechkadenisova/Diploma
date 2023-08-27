@@ -55,7 +55,6 @@ namespace Diploma.BussinesObject
             driver.FindElement(LocationTitlesPage).Click();
         }
 
-
         [AllureStep("Add new location")]
         public void AddNewLocation()
         {

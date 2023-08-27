@@ -56,13 +56,13 @@ namespace Diploma.BussinesObject
         [AllureStep("Add new entitlement")]
         public void AddedEntitlement()
         {
-
             var numbers = RandomHelper.GenerateRandomNumericString(6);
 
             logger.Info("Add new entitlement: Multiple Employees");
             driver.FindElement(Entitlements).Click();
             driver.FindElement(AddEntitlements).Click();
-            driver.FindElement(MultipleEmployees).Click();;
+            driver.FindElement(MultipleEmployees).Click();
+
             IWebElement locationDropdown = driver.FindElement(LocationDropdown);
             locationDropdown.Click();
             IWebElement locationText = driver.FindElement(LocationText);
@@ -72,7 +72,6 @@ namespace Diploma.BussinesObject
             subUnitDropdown.Click();
             IWebElement subUnitText = driver.FindElement(SubUnitText);
             subUnitText.Click();
-
 
             IWebElement leaveTypeDropdown = driver.FindElement(LeaveTypeDropdown);
             leaveTypeDropdown.Click();

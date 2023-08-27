@@ -54,8 +54,9 @@ namespace Diploma.BussinesObject
 
         [AllureStep("Add new job")]
         public void AddNewJob()
-    {
+        {
             logger.Info("Add new Job");
+
             driver.FindElement(AddButton).Click();
             driver.FindElement(TitleJob).SendKeys("Admin");
             driver.FindElement(JobDescription).SendKeys("test");
@@ -67,6 +68,7 @@ namespace Diploma.BussinesObject
         public void ChangeNewJob()
         {
             logger.Info("Change new Job: Download File");
+
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement editElement = textElement.FindElement(EditIcon);
             editElement.Click();
@@ -84,6 +86,7 @@ namespace Diploma.BussinesObject
         public void DeleteNewJob()
         {
             logger.Info("Delete new Job");
+
             IWebElement textElement = driver.FindElement(FieldAdmin);
             IWebElement delElement = textElement.FindElement(DeleteIcon);
             delElement.Click();
