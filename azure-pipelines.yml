@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- feature
+- develop
 
 pool:
   name: 'Default'
@@ -28,4 +28,4 @@ steps:
   displayName: 'Dotnet test -s BrowserSetup.runsettings'
   inputs:
     command: 'test' 
-    arguments: '-s C:\Users\nickd\source\azure\_work\1\s\Diploma\RunSettings\BrowserSetUp.runsettings'
+    arguments: '-s C:\Users\nickd\source\repos\Diploma\Diploma\RunSettings\BrowserSetUp.runsettings'
