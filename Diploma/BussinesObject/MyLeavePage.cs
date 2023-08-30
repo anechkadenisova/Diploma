@@ -11,7 +11,7 @@ namespace Diploma.BussinesObject
         private By LeaveMenu = By.XPath("//span[text()='Leave']");
         private By MyLeave = By.XPath("//a[text()='My Leave']");
         private By ThreeDots = By.CssSelector(".bi-three-dots-vertical");
-        private By AddComment = By.CssSelector(".oxd-table-dropdown-item");
+        private By AddComment = By.XPath("//p[@class='oxd-text oxd-text--p']");
         private By TitleComment = By.CssSelector(".oxd-textarea");
         private By SaveButton = By.XPath("//button[text()=' Save ']");
         private By LaveDetails = By.XPath("//p[text()='View Leave Details']");
@@ -47,6 +47,7 @@ namespace Diploma.BussinesObject
         {
             logger.Info("Add new comment in Leave List: OK");
             driver.FindElement(ThreeDots).Click();
+            Thread.Sleep(1000);
             driver.FindElement(AddComment).Click();
             driver.FindElement(TitleComment).SendKeys("OK");
             driver.FindElement(SaveButton).Click();
