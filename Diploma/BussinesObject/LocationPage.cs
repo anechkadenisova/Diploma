@@ -51,6 +51,7 @@ namespace Diploma.BussinesObject
         {
             logger.Info("Navigate to Job Page");
             driver.FindElement(AdminPage).Click();
+            Thread.Sleep(2000);
             driver.FindElement(OrganizationTitle).Click();
             driver.FindElement(LocationTitlesPage).Click();
         }
