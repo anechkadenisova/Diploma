@@ -14,8 +14,8 @@ namespace Diploma.BussinesObject
     public class LocationPage : BasePage
     {
         private By AdminPage = By.XPath("//span[text()='Admin']");
-        private By OrganizationTitle = By.XPath("//span[text()='Organization ']");
-        private By LocationTitlesPage = By.XPath("//a[text()='Locations']");
+        private By OrganizationTitle = By.XPath("//*[@id=\"app\"]/div[1]/div[1]/header/div[2]/nav/ul/li[3]/span");
+        private By LocationTitlesPage = By.XPath("(//a[@class='oxd-topbar-body-nav-tab-link'])[2]");
         private By AddButton = By.CssSelector(".oxd-button-icon");
         private By SaveLocation = By.CssSelector(".oxd-button--secondary");
         private By NameLocation = By.XPath("(//input[@class='oxd-input oxd-input--active'])[2]");
@@ -53,6 +53,7 @@ namespace Diploma.BussinesObject
             driver.FindElement(AdminPage).Click();
             Thread.Sleep(2000);
             driver.FindElement(OrganizationTitle).Click();
+            Thread.Sleep(2000);
             driver.FindElement(LocationTitlesPage).Click();
         }
 
