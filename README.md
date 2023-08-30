@@ -46,6 +46,13 @@ Browser automation: *Selenium*
 | :-------- | :------- | :-------------------------------- |
 | AddLeaveEntitlement  | Positive | Try to add Leave Entitlement with Multiple Employees |
 
+**Location Tests**
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| Add Location | Positive | Try to add new random Location |
+| Check Location | Positive | Check new Location |
+| Delete Location  | Positive | Try to delete new Location |
+
 ## Installation
 1. Clone repository OrangeHRM tests - [Diploma](https://github.com/anechkadenisova/Diploma) repository.
 
